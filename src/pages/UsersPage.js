@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Colors } from '../theme/colors';
-import { fetchUsers, fetchUserDetails, updateUser } from '../services/usersService';
+import { fetchUsers, fetchUserDetails, updateUser, updateUserRole } from '../services/usersService';
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -43,8 +43,9 @@ const UsersPage = () => {
     setUpdateError('');
     setUpdateSuccess('');
     try {
-      const data = await fetchUserDetails(id);
+      const data = await fetchUserDetails(id); 
       setSelectedUser(data);
+      setEditedRole(data.role);
     } catch (err) {
       setError(err.message);
     }
@@ -52,6 +53,27 @@ const UsersPage = () => {
 
   const handleSearch = () => {
     setSearchUsername(username);
+  };
+
+  const handleRoleChange = (e) => {
+    setEditedRole(e.target.value);
+  };
+
+  const handleUpdateUser = async () => {
+    setUpdateError('');
+    setUpdateSuccess('');
+    try {
+      const updatedData = {
+        ...selectedUser,
+        role: editedRole,
+      };
+  
+      const updatedUser = await updateUserRole(selectedUser.id, updatedData);
+      setSelectedUser(updatedUser);
+      setUpdateSuccess('User updated successfully');
+    } catch (err) {
+      setUpdateError(err.message);
+    }
   };
 
   return (
@@ -125,7 +147,20 @@ const UsersPage = () => {
           <p><strong>ID:</strong> {selectedUser.id}</p>
           <p><strong>Username:</strong> {selectedUser.username}</p>
           <p><strong>Email:</strong> {selectedUser.email}</p>
-          {/* Add other fields here if needed */}
+          <div style={{ marginTop: '20px' }}>
+            <label style={styles.label}>
+              Role:
+              <select value={editedRole} onChange={handleRoleChange} style={styles.input}>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </label>
+            <button onClick={handleUpdateUser} style={{ ...styles.button, marginTop: '10px' }}>
+              Update Role
+            </button>
+            {updateSuccess && <p style={{ color: 'green' }}>{updateSuccess}</p>}
+            {updateError && <p style={{ color: 'red' }}>{updateError}</p>}
+          </div>
         </div>
       )}
     </div>

@@ -33,9 +33,9 @@ export const fetchUserDetails = async (id) => {
   return await response.json();
 };
 
-export const updateUser = async (id, updatedUserData) => {
+export const updateUserRole = async (id, updatedUserData) => {
     const response = await fetch(`${API_CONFIG.BASE_URL}/users/${id}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
