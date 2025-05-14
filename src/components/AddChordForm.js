@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Colors } from '../theme/colors';
-import { API_CONFIG } from '../config';
+import { addChord } from '../services/chordsService';
 
 const AddChordForm = () => {
   const [chordName, setChordName] = useState('');
@@ -15,29 +15,14 @@ const AddChordForm = () => {
     setErrorMessage('');
 
     try {
-        const response = await fetch(`${API_CONFIG.BASE_URL}/chords`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({ name: chordName }),
-        });
-      
-        if (!response.ok) {
-          const errorData = await response.json();
-          const message = errorData?.message || 'Failure adding chord';
-          throw new Error(message);
-        }
-      
-        setSuccessMessage('Chord add successfully!');
-        setChordName('');
-      } catch (error) {
-        setErrorMessage(error.message);
-      } finally {
-        setIsLoading(false)
-      }
-      
+      await addChord(chordName);
+      setSuccessMessage('Chord added successfully!');
+      setChordName('');
+    } catch (error) {
+      setErrorMessage(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

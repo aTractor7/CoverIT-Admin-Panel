@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import AddChordPage from './pages/AddChordPage';
 import { checkAuth } from './services/authService';
+import UsersPage from './pages/UsersPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -39,6 +40,12 @@ function App() {
           path="/add-chord" 
           element={
             isAuthenticated ? (<AddChordPage />) : (<Navigate to="/login" replace />)
+          } 
+        />
+        <Route 
+          path="/users" 
+          element={
+            isAuthenticated ? (<UsersPage />) : (<Navigate to="/login" replace />)
           } 
         />
       </Routes>
