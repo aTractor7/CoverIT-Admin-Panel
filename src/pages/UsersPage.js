@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Colors } from '../theme/colors';
+import { fetchUsers, fetchUserDetails, updateUser } from '../services/usersService';
 
 const UsersPage = () => {
   const [users, setUsers] = useState([]);
@@ -11,51 +12,38 @@ const UsersPage = () => {
   const [searchUsername, setSearchUsername] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
   const [error, setError] = useState('');
+  const [editedRole, setEditedRole] = useState('');
+  const [updateSuccess, setUpdateSuccess] = useState('');
+  const [updateError, setUpdateError] = useState('');
+
 
   useEffect(() => {
-    fetchUsers();
+    loadUsers();
   }, [page, size, sortField, searchUsername]);
 
-  const fetchUsers = async () => {
+  const loadUsers = async () => {
     setError('');
     setSelectedUser(null);
     try {
-      const queryParams = new URLSearchParams({
-        page,
-        size,
-        ...(sortField ? { sortField } : {}),
-        ...(searchUsername ? { username: searchUsername } : {})
-      });
+        const data = await fetchUsers({ 
+            page, 
+            size, 
+            sortField, 
+            username: searchUsername 
+          });
 
-      const response = await fetch(`http://localhost:8080/users?${queryParams.toString()}`, {
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData?.message || 'Failed to fetch users');
-      }
-
-      const data = await response.json();
-      setUsers(data);
+        setUsers(data);
     } catch (err) {
-      setError(err.message);
+        setError(err.message);
     }
   };
 
-  const fetchUserDetails = async (id) => {
+  const loadUserDetails  = async (id) => {
     setError('');
+    setUpdateError('');
+    setUpdateSuccess('');
     try {
-      const response = await fetch(`http://localhost:8080/users/${id}`, {
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData?.message || 'Failed to fetch user');
-      }
-
-      const data = await response.json();
+      const data = await fetchUserDetails(id);
       setSelectedUser(data);
     } catch (err) {
       setError(err.message);
@@ -124,7 +112,7 @@ const UsersPage = () => {
           <div
             key={user.id}
             style={styles.userItem}
-            onClick={() => fetchUserDetails(user.id)}
+            onClick={() => loadUserDetails(user.id)}
           >
             {user.username} ({user.email})
           </div>

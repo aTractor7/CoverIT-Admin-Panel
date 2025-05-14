@@ -32,3 +32,21 @@ export const fetchUserDetails = async (id) => {
 
   return await response.json();
 };
+
+export const updateUser = async (id, updatedUserData) => {
+    const response = await fetch(`${API_CONFIG.BASE_URL}/users/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(updatedUserData),
+    });
+  
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData?.message || 'Failed to update user');
+    }
+  
+    return await response.json();
+  };

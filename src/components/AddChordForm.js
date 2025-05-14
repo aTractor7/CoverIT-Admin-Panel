@@ -15,14 +15,15 @@ const AddChordForm = () => {
     setErrorMessage('');
 
     try {
-      await addChord(chordName);
-      setSuccessMessage('Chord added successfully!');
-      setChordName('');
-    } catch (error) {
-      setErrorMessage(error.message);
-    } finally {
-      setIsLoading(false);
-    }
+        await addChord(chordName);
+        setSuccessMessage('Chord added successfully!');
+        setChordName('');
+      } catch (error) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false)
+      }
+      
   };
 
   return (
