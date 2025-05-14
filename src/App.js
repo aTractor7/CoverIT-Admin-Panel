@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import AddChordPage from './pages/AddChordPage';
 import { checkAuth } from './services/authService';
 
 function App() {
@@ -34,7 +35,14 @@ function App() {
             isAuthenticated ? (<DashboardPage />) : (<Navigate to="/login" replace />)
           } 
         />
+        <Route 
+          path="/add-chord" 
+          element={
+            isAuthenticated ? (<AddChordPage />) : (<Navigate to="/login" replace />)
+          } 
+        />
       </Routes>
+      
     </Router>
   );
 }
