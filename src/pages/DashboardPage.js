@@ -11,6 +11,9 @@ const DashboardPage = () => {
         <Link to="/add-chord" style={styles.textLink}>
           Add chord
         </Link>
+        <Link to="/fingerings" style={styles.textLink}>
+          Fingerings
+        </Link>
         <Link to="/users" style={styles.textLink}>
           Users
         </Link>

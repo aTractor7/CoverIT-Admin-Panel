@@ -5,6 +5,7 @@ import DashboardPage from './pages/DashboardPage';
 import AddChordPage from './pages/AddChordPage';
 import { checkAuth } from './services/authService';
 import UsersPage from './pages/UsersPage';
+import FingeringPage from './pages/FingeringPage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -46,6 +47,12 @@ function App() {
           path="/users" 
           element={
             isAuthenticated ? (<UsersPage />) : (<Navigate to="/login" replace />)
+          } 
+        />
+        <Route 
+          path="/fingerings" 
+          element={
+            isAuthenticated ? (<FingeringPage />) : (<Navigate to="/login" replace />)
           } 
         />
       </Routes>
