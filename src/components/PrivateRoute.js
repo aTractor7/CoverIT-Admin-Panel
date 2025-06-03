@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }) => {
   }, []);
 
   if (isAuthenticated === null) {
-    return <div>Check authorization...</div>;
+    return <div>Перевірка авторизації...</div>;
   }
 
   return isAuthenticated ? children : <Navigate to="/login" replace />;

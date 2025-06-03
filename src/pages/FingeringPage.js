@@ -7,9 +7,9 @@ const FingeringPage = () => {
   return (
     <div style={styles.container}>
       <Link to="/" style={styles.homeLink}>
-        ← Back to panel
+        ← До панелі
       </Link>
-      <h1 style={styles.title}>Fingering Image Upload</h1>
+      <h1 style={styles.title}>Завантаження зображення аплікатури</h1>
       <ChordFingeringUploadForm />
     </div>
   );

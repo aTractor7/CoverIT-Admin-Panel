@@ -13,7 +13,7 @@ const AddChordPage = () => {
       alignItems: 'center',
       padding: '20px'
     }}>
-      <Link to="/" style={styles.homeLink}>← Back to panel</Link>
+      <Link to="/" style={styles.homeLink}>← До панелі</Link>
       <AddChordForm />
     </div>
   );

@@ -20,7 +20,7 @@ const LoginForm = ({ onLoginSuccess }) => {
       await onLoginSuccess();
       navigate('/');
     } catch (err) {
-      setError('Wrong username or password');
+      setError('Неправильне ім\'я користувача або пароль');
       setIsLoading(false);
     }
   };
@@ -31,7 +31,7 @@ const LoginForm = ({ onLoginSuccess }) => {
       
       <form onSubmit={handleSubmit} style={styles.form}>
         <div style={styles.inputGroup}>
-          <label htmlFor="username" style={styles.label}>Username</label>
+          <label htmlFor="username" style={styles.label}>Ім'я користувача</label>
           <input
             id="username"
             type="text"
@@ -43,7 +43,7 @@ const LoginForm = ({ onLoginSuccess }) => {
         </div>
         
         <div style={styles.inputGroup}>
-          <label htmlFor="password" style={styles.label}>Password</label>
+          <label htmlFor="password" style={styles.label}>Пароль</label>
           <input
             id="password"
             type="password"
@@ -61,7 +61,7 @@ const LoginForm = ({ onLoginSuccess }) => {
           style={styles.button}
           disabled={isLoading}
         >
-          {isLoading ? 'Loading...' : 'Log In'}
+          {isLoading ? 'Завантаження...' : 'Вхід'}
         </button>
       </form>
     </div>

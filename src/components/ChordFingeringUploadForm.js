@@ -28,7 +28,7 @@ const ChordFingeringUploadForm = () => {
     setError('');
 
     if (!selectedChord || !imageFile) {
-      setError('Please select a chord and upload an image.');
+      setError('Будь ласка, виберіть акорд і завантажте зображення.');
       return;
     }
 
@@ -41,7 +41,7 @@ const ChordFingeringUploadForm = () => {
 
     try {
       await uploadFingeringImage(fingeringJson, imageFile);
-      setMessage('Image uploaded successfully!');
+      setMessage('Зображення успішно завантажено!');
       setSelectedChord(null);
       setChordName('');
       setSearchResults([]);
@@ -56,12 +56,12 @@ const ChordFingeringUploadForm = () => {
       <div style={styles.controls}>
         <input
           type="text"
-          placeholder="Search chord by name"
+          placeholder="Пошук акорду за назвою"
           value={chordName}
           onChange={(e) => setChordName(e.target.value)}
           style={styles.input}
         />
-        <button onClick={handleSearch} style={styles.button}>Search</button>
+        <button onClick={handleSearch} style={styles.button}>Пошук</button>
       </div>
 
       <div style={styles.list}>
@@ -81,7 +81,7 @@ const ChordFingeringUploadForm = () => {
       </div>
 
       <input type="file" accept="image/png" onChange={handleFileChange} style={{ marginTop: '20px' }} />
-      <button onClick={handleSubmit} style={{ ...styles.button, marginTop: '10px' }}>Add</button>
+      <button onClick={handleSubmit} style={{ ...styles.button, marginTop: '10px' }}>Додати</button>
 
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}

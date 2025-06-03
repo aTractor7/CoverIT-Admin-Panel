@@ -70,7 +70,7 @@ const UsersPage = () => {
   
       const updatedUser = await updateUserRole(selectedUser.id, updatedData);
       setSelectedUser(updatedUser);
-      setUpdateSuccess('User updated successfully');
+      setUpdateSuccess('Користувача успішно змінено');
     } catch (err) {
       setUpdateError(err.message);
     }
@@ -79,13 +79,13 @@ const UsersPage = () => {
   return (
     <div style={styles.container}>
         <Link to="/" style={styles.homeLink}>
-        ← Back to panel
+        ← До панелі
         </Link>
-      <h1 style={styles.title}>User Management</h1>
+      <h1 style={styles.title}>Керування користувачами</h1>
 
       <div style={styles.controls}>
         <label style={styles.label}>
-          Page:
+          Сторінка:
           <input
             type="number"
             value={page}
@@ -94,7 +94,7 @@ const UsersPage = () => {
           />
         </label>
         <label style={styles.label}>
-          Size:
+          Кількість елементів:
           <input
             type="number"
             value={size}
@@ -103,27 +103,27 @@ const UsersPage = () => {
           />
         </label>
         <label style={styles.label}>
-          Sort by:
+          Сортувати за:
           <input
             type="text"
             value={sortField}
             onChange={(e) => setSortField(e.target.value)}
-            placeholder="e.g. username"
+            placeholder="наприклад, username"
             style={styles.input}
           />
         </label>
         <label style={styles.label}>
-          Username:
+          Ім'я користувача:
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Search by username"
+            placeholder="Пошук за ім'ям"
             style={styles.input}
           />
         </label>
         <button onClick={handleSearch} style={styles.button}>
-          Search
+          Пошук
         </button>
       </div>
 
@@ -143,20 +143,20 @@ const UsersPage = () => {
 
       {selectedUser && (
         <div style={styles.details}>
-          <h2 style={styles.subTitle}>User Details</h2>
+          <h2 style={styles.subTitle}>Дані користувача</h2>
           <p><strong>ID:</strong> {selectedUser.id}</p>
-          <p><strong>Username:</strong> {selectedUser.username}</p>
-          <p><strong>Email:</strong> {selectedUser.email}</p>
+          <p><strong>Ім'я користувача:</strong> {selectedUser.username}</p>
+          <p><strong>Пошта:</strong> {selectedUser.email}</p>
           <div style={{ marginTop: '20px' }}>
             <label style={styles.label}>
-              Role:
+              Роль:
               <select value={editedRole} onChange={handleRoleChange} style={styles.input}>
                 <option value="USER">USER</option>
                 <option value="ADMIN">ADMIN</option>
               </select>
             </label>
             <button onClick={handleUpdateUser} style={{ ...styles.button, marginTop: '10px' }}>
-              Update Role
+              Оновити роль
             </button>
             {updateSuccess && <p style={{ color: 'green' }}>{updateSuccess}</p>}
             {updateError && <p style={{ color: 'red' }}>{updateError}</p>}

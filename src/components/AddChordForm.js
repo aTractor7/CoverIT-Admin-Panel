@@ -16,7 +16,7 @@ const AddChordForm = () => {
 
     try {
         await addChord(chordName);
-        setSuccessMessage('Chord added successfully!');
+        setSuccessMessage('Акорд додано успісшо!');
         setChordName('');
       } catch (error) {
         setErrorMessage(error.message);
@@ -28,10 +28,10 @@ const AddChordForm = () => {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.title}>Add new chord</h2>
+      <h2 style={styles.title}>Додати новий акорд</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div style={styles.inputGroup}>
-          <label htmlFor="chordName" style={styles.label}>Chord name</label>
+          <label htmlFor="chordName" style={styles.label}>Назва акорду</label>
           <input
             id="chordName"
             type="text"
@@ -50,7 +50,7 @@ const AddChordForm = () => {
           style={styles.button}
           disabled={isLoading}
         >
-          {isLoading ? 'Adding...' : 'Add chord'}
+          {isLoading ? 'Додавання...' : 'Додати'}
         </button>
       </form>
     </div>

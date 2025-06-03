@@ -5,21 +5,19 @@ import { Colors } from '../theme/colors';
 const DashboardPage = () => {
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Admin panel</h1>
+      <h1 style={styles.title}>Панель адміністора</h1>
 
       <div style={styles.linksContainer}>
         <Link to="/add-chord" style={styles.textLink}>
-          Add chord
+          Додати акорд
         </Link>
         <Link to="/fingerings" style={styles.textLink}>
-          Fingerings
+          Аплікатури
         </Link>
         <Link to="/users" style={styles.textLink}>
-          Users
+          Користувачі
         </Link>
       </div>
-
-      {/* Тут буде ваш основний контент адмін панелі */}
     </div>
   );
 };
